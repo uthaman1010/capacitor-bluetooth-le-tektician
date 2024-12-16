@@ -4,7 +4,7 @@ export default {
     {
       file: 'dist/plugin.js',
       format: 'iife',
-      name: 'capacitorCommunityBluetoothLe',
+      name: 'capacitorCapacitorBluetoothLeTektician',
       globals: {
         '@capacitor/core': 'capacitorExports',
       },
