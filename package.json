@@ -1,6 +1,6 @@
 {
   "name": "capacitor-bluetooth-le-tektician",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Created bluetooth plugin",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
