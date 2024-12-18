@@ -132,17 +132,23 @@ public class BluetoothLe: CAPPlugin {
                 }
             }, {(_, _, _) in
 
+            }, {(_, _) in
+                
             }
         )
     }
 
     @objc func requestLEScan(_ call: CAPPluginCall) {
-        guard let deviceManager = self.getDeviceManager(call) else { return }
+        guard let deviceManager = self.getDeviceManager(call) else {
+            call.reject("Failed to get device manager")
+            return
+        }
 
         let serviceUUIDs = self.getServiceUUIDs(call)
         let name = call.getString("name")
         let namePrefix = call.getString("namePrefix")
         let allowDuplicates = call.getBool("allowDuplicates", false)
+        let scanDuration = call.getDouble("scanDuration", 10.0)
 
         deviceManager.startScanning(
             serviceUUIDs,
@@ -150,7 +156,7 @@ public class BluetoothLe: CAPPlugin {
             namePrefix,
             allowDuplicates,
             false,
-            nil, {(success, message) in
+            scanDuration, {(success, message) in
                 if success {
                     call.resolve()
                 } else {
@@ -160,6 +166,16 @@ public class BluetoothLe: CAPPlugin {
                 self.deviceMap[device.getId()] = device
                 let data = self.getScanResult(device, advertisementData, rssi)
                 self.notifyListeners("onScanResult", data: data)
+            },{ (message, success) in
+                
+                // Handle scan completion callback
+                let scanConcluded = [
+                                "message": message,
+                                "success": success
+                            ]
+
+                self.notifyListeners("onScanComplete", data: scanConcluded)
+                call.resolve(scanConcluded)
             }
         )
     }

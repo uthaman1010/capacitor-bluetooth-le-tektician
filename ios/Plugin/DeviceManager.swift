@@ -5,12 +5,14 @@ class DeviceManager: NSObject, CBCentralManagerDelegate {
     typealias Callback = (_ success: Bool, _ message: String) -> Void
     typealias StateReceiver = (_ enabled: Bool) -> Void
     typealias ScanResultCallback = (_ device: Device, _ advertisementData: [String: Any], _ rssi: NSNumber) -> Void
+    typealias StopCallback = (_ message: String, _ success: Bool) -> Void
 
     private var centralManager: CBCentralManager!
     private var viewController: UIViewController?
     private var displayStrings: [String: String]!
     private var callbackMap = [String: Callback]()
     private var scanResultCallback: ScanResultCallback?
+    private var stopCallback: StopCallback?
     private var stateReceiver: StateReceiver?
     private var timeoutMap = [String: DispatchWorkItem]()
     private var stopScanWorkItem: DispatchWorkItem?
@@ -20,6 +22,7 @@ class DeviceManager: NSObject, CBCentralManagerDelegate {
     private var deviceNamePrefixFilter: String?
     private var shouldShowDeviceList = false
     private var allowDuplicates = false
+    
 
     init(_ viewController: UIViewController?, _ displayStrings: [String: String], _ callback: @escaping Callback) {
         super.init()
@@ -41,7 +44,7 @@ class DeviceManager: NSObject, CBCentralManagerDelegate {
             self.resolve(initializeKey, "BLE powered on")
             self.emitState(enabled: true)
         case .poweredOff:
-            self.stopScan()
+            self.stopScan(onSetTime: false)
             self.resolve(initializeKey, "BLE powered off")
             self.emitState(enabled: false)
         case .resetting:
@@ -83,10 +86,12 @@ class DeviceManager: NSObject, CBCentralManagerDelegate {
         _ shouldShowDeviceList: Bool,
         _ scanDuration: Double?,
         _ callback: @escaping Callback,
-        _ scanResultCallback: @escaping ScanResultCallback
+        _ scanResultCallback: @escaping ScanResultCallback,
+        _ stopCallback: @escaping StopCallback // Added stopCallback
     ) {
         self.callbackMap["startScanning"] = callback
         self.scanResultCallback = scanResultCallback
+        self.stopCallback = stopCallback // Assign the stopCallback
 
         if self.centralManager.isScanning == false {
             self.discoveredDevices = [String: Device]()
@@ -94,17 +99,19 @@ class DeviceManager: NSObject, CBCentralManagerDelegate {
             self.allowDuplicates = allowDuplicates
             self.deviceNameFilter = name
             self.deviceNamePrefixFilter = namePrefix
-
+            log("Stop On ScanDuration", scanDuration!)
             if shouldShowDeviceList {
                 self.showDeviceList()
             }
 
             if scanDuration != nil {
                 self.stopScanWorkItem = DispatchWorkItem {
-                    self.stopScan()
+                    print("stopScanWorkItem executed: Calling stopScan.")
+                    self.stopScan(onSetTime: true)
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + scanDuration!, execute: self.stopScanWorkItem!)
             }
+            
             self.centralManager.scanForPeripherals(
                 withServices: serviceUUIDs,
                 options: [CBCentralManagerScanOptionAllowDuplicatesKey: allowDuplicates]
@@ -113,17 +120,23 @@ class DeviceManager: NSObject, CBCentralManagerDelegate {
             if shouldShowDeviceList == false {
                 self.resolve("startScanning", "Scan started.")
             }
+            
         } else {
-            self.stopScan()
+            self.stopScan(onSetTime: false)
             self.reject("startScanning", "Already scanning. Stopping now.")
         }
     }
 
-    func stopScan() {
+    func stopScan(onSetTime:Bool = false) {
         log("Stop scanning.")
         self.centralManager.stopScan()
         self.stopScanWorkItem?.cancel()
         self.stopScanWorkItem = nil
+        
+        // Invoke stopCallback when the scan stops
+        log("Stop On ScanDuration")
+        self.stopCallback?("Scan stopped successfully.", onSetTime)
+    
         DispatchQueue.main.async { [weak self] in
             if self?.discoveredDevices.count == 0 {
                 self?.alertController?.title = self?.displayStrings["noDeviceFound"]
@@ -166,7 +179,7 @@ class DeviceManager: NSObject, CBCentralManagerDelegate {
             DispatchQueue.main.async { [weak self] in
                 self?.alertController?.addAction(UIAlertAction(title: device.getName() ?? "Unknown", style: UIAlertAction.Style.default, handler: { (_) in
                     log("Selected device")
-                    self?.stopScan()
+                    self?.stopScan(onSetTime: false)
                     self?.resolve("startScanning", device.getId())
                 }))
             }
@@ -182,7 +195,7 @@ class DeviceManager: NSObject, CBCentralManagerDelegate {
             self?.alertController = UIAlertController(title: self?.displayStrings["scanning"], message: nil, preferredStyle: UIAlertController.Style.alert)
             self?.alertController?.addAction(UIAlertAction(title: self?.displayStrings["cancel"], style: UIAlertAction.Style.cancel, handler: { (_) in
                 log("Cancelled request device.")
-                self?.stopScan()
+                self?.stopScan(onSetTime: false)
                 self?.reject("startScanning", "requestDevice cancelled.")
             }))
             self?.viewController?.present((self?.alertController)!, animated: true, completion: nil)
@@ -346,4 +359,5 @@ class DeviceManager: NSObject, CBCentralManagerDelegate {
         self.timeoutMap[key] = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + connectionTimeout, execute: workItem)
     }
+    
 }
