@@ -1,6 +1,6 @@
-<p align="center"><br><img src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png" width="128" height="128" /></p>
+<!-- <p align="center"><br><img src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png" width="128" height="128" /></p> -->
 <h3 align="center">Bluetooth Low Energy</h3>
-<p align="center"><strong><code>@capacitor-community/bluetooth-le</code></strong></p>
+<p align="center"><strong><code>capacitor-bluetooth-le-tektician</code></strong></p>
 <p align="center">
   Capacitor plugin for Bluetooth Low Energy 
 </p>
@@ -53,42 +53,42 @@ Below is an index of all the methods available.
 
 <docgen-index>
 
-- [`initialize(...)`](#initialize)
-- [`isEnabled()`](#isenabled)
-- [`requestEnable()`](#requestenable)
-- [`enable()`](#enable)
-- [`disable()`](#disable)
-- [`startEnabledNotifications(...)`](#startenablednotifications)
-- [`stopEnabledNotifications()`](#stopenablednotifications)
-- [`isLocationEnabled()`](#islocationenabled)
-- [`openLocationSettings()`](#openlocationsettings)
-- [`openBluetoothSettings()`](#openbluetoothsettings)
-- [`openAppSettings()`](#openappsettings)
-- [`setDisplayStrings(...)`](#setdisplaystrings)
-- [`requestDevice(...)`](#requestdevice)
-- [`requestLEScan(...)`](#requestlescan)
-- [`stopLEScan()`](#stoplescan)
-- [`getDevices(...)`](#getdevices)
-- [`getBondedDevices()`](#getbondeddevices)
-- [`getConnectedDevices(...)`](#getconnecteddevices)
-- [`connect(...)`](#connect)
-- [`createBond(...)`](#createbond)
-- [`isBonded(...)`](#isbonded)
-- [`disconnect(...)`](#disconnect)
-- [`getServices(...)`](#getservices)
-- [`discoverServices(...)`](#discoverservices)
-- [`getMtu(...)`](#getmtu)
-- [`requestConnectionPriority(...)`](#requestconnectionpriority)
-- [`readRssi(...)`](#readrssi)
-- [`read(...)`](#read)
-- [`write(...)`](#write)
-- [`writeWithoutResponse(...)`](#writewithoutresponse)
-- [`readDescriptor(...)`](#readdescriptor)
-- [`writeDescriptor(...)`](#writedescriptor)
-- [`startNotifications(...)`](#startnotifications)
-- [`stopNotifications(...)`](#stopnotifications)
-- [Interfaces](#interfaces)
-- [Enums](#enums)
+* [`initialize(...)`](#initialize)
+* [`isEnabled()`](#isenabled)
+* [`requestEnable()`](#requestenable)
+* [`enable()`](#enable)
+* [`disable()`](#disable)
+* [`startEnabledNotifications(...)`](#startenablednotifications)
+* [`stopEnabledNotifications()`](#stopenablednotifications)
+* [`isLocationEnabled()`](#islocationenabled)
+* [`openLocationSettings()`](#openlocationsettings)
+* [`openBluetoothSettings()`](#openbluetoothsettings)
+* [`openAppSettings()`](#openappsettings)
+* [`setDisplayStrings(...)`](#setdisplaystrings)
+* [`requestDevice(...)`](#requestdevice)
+* [`requestLEScan(...)`](#requestlescan)
+* [`stopLEScan()`](#stoplescan)
+* [`getDevices(...)`](#getdevices)
+* [`getBondedDevices()`](#getbondeddevices)
+* [`getConnectedDevices(...)`](#getconnecteddevices)
+* [`connect(...)`](#connect)
+* [`createBond(...)`](#createbond)
+* [`isBonded(...)`](#isbonded)
+* [`disconnect(...)`](#disconnect)
+* [`getServices(...)`](#getservices)
+* [`discoverServices(...)`](#discoverservices)
+* [`getMtu(...)`](#getmtu)
+* [`requestConnectionPriority(...)`](#requestconnectionpriority)
+* [`readRssi(...)`](#readrssi)
+* [`read(...)`](#read)
+* [`write(...)`](#write)
+* [`writeWithoutResponse(...)`](#writewithoutresponse)
+* [`readDescriptor(...)`](#readdescriptor)
+* [`writeDescriptor(...)`](#writedescriptor)
+* [`startNotifications(...)`](#startnotifications)
+* [`stopNotifications(...)`](#stopnotifications)
+* [Interfaces](#interfaces)
+* [Enums](#enums)
 
 </docgen-index>
 
@@ -97,7 +97,7 @@ See [Platform Support](#platform-support) for an overview of supported methods o
 ## Installation
 
 ```
-npm install @capacitor-community/bluetooth-le
+npm install capacitor-bluetooth-le-tektician
 npx cap sync
 ```
 
@@ -152,7 +152,7 @@ The following steps are required to scan for Bluetooth devices without location 
   ```
 - Set the `androidNeverForLocation` flag to `true` when initializing the `BleClient`.
   ```ts
-  import { BleClient } from '@capacitor-community/bluetooth-le';
+  import { BleClient } from 'capacitor-bluetooth-le-tektician';
   await BleClient.initialize({ androidNeverForLocation: true });
   ```
 
@@ -205,7 +205,7 @@ There is a plugin wrapper class `BleClient` which makes events and method argume
 
 ```typescript
 // Import the wrapper class
-import { BleClient } from '@capacitor-community/bluetooth-le';
+import { BleClient } from 'capacitor-bluetooth-le-tektician';
 ```
 
 **Note**: It is not recommended to use the `BluetoothLe` plugin class directly.
@@ -214,8 +214,8 @@ import { BleClient } from '@capacitor-community/bluetooth-le';
 
 Here is an example of how to use the plugin. It shows how to read the heart rate from a BLE heart rate monitor such as the Polar H10.
 
-```typescript
-import { BleClient, numbersToDataView, numberToUUID } from '@capacitor-community/bluetooth-le';
+<!-- ```typescript
+import { BleClient, numbersToDataView, numberToUUID } from 'capacitor-bluetooth-le-tektician';
 
 const HEART_RATE_SERVICE = '0000180d-0000-1000-8000-00805f9b34fb';
 const HEART_RATE_MEASUREMENT_CHARACTERISTIC = '00002a37-0000-1000-8000-00805f9b34fb';
@@ -282,14 +282,14 @@ function parseHeartRate(value: DataView): number {
   }
   return heartRate;
 }
-```
+``` -->
 
 ### Scanning API
 
 Here is an example of using the scanning API.
 
 ```typescript
-import { BleClient, numberToUUID } from '@capacitor-community/bluetooth-le';
+import { BleClient, numberToUUID } from 'capacitor-bluetooth-le-tektician';
 
 const HEART_RATE_SERVICE = numberToUUID(0x180d);
 
@@ -330,7 +330,7 @@ _Note_: web support depends on the browser, see [implementation status](https://
 | -------------------------------------------------------------- | :-----: | :-: | :-: |
 | [`initialize()`](#initialize)                                  |   ✅    | ✅  | ✅  |
 | [`isEnabled()`](#isenabled)                                    |   ✅    | ✅  | --  |
-| [`requestEnable()`](#requestEnable)                            |   ✅    | ❌  | ❌  |
+<!-- | [`requestEnable()`](#requestEnable)                            |   ✅    | ❌  | ❌  |
 | [`enable()`](#enable)                                          |   ✅    | ❌  | ❌  |
 | [`disable()`](#disable)                                        |   ✅    | ❌  | ❌  |
 | [`startEnabledNotifications(...)`](#startenablednotifications) |   ✅    | ✅  | --  |
@@ -340,10 +340,10 @@ _Note_: web support depends on the browser, see [implementation status](https://
 | [`openBluetoothSettings()`](#openbluetoothsettings)            |   ✅    | ❌  | ❌  |
 | [`openAppSettings()`](#openappsettings)                        |   ✅    | ✅  | ❌  |
 | [`setDisplayStrings(...)`](#setdisplaystrings)                 |   ✅    | ✅  | --  |
-| [`requestDevice(...)`](#requestdevice)                         |   ✅    | ✅  | ✅  |
+| [`requestDevice(...)`](#requestdevice)                         |   ✅    | ✅  | ✅  | -->
 | [`requestLEScan(...)`](#requestlescan)                         |   ✅    | ✅  | 🚩  |
 | [`stopLEScan()`](#stoplescan)                                  |   ✅    | ✅  | 🚩  |
-| [`getDevices(...)`](#getdevices)                               |   ✅    | ✅  | 🚩  |
+<!-- | [`getDevices(...)`](#getdevices)                               |   ✅    | ✅  | 🚩  |
 | [`getConnectedDevices(...)`](#getconnecteddevices)             |   ✅    | ✅  | 🚩  |
 | [`connect(...)`](#connect)                                     |   ✅    | ✅  | ✅  |
 | [`createBond(...)`](#createbond)                               |   ✅    | ❌  | ❌  |
@@ -360,7 +360,7 @@ _Note_: web support depends on the browser, see [implementation status](https://
 | [`writeDescriptor(...)`](#writedescriptor)                     |   ✅    | ✅  | ✅  |
 | [`writeWithoutResponse(...)`](#writewithoutresponse)           |   ✅    | ✅  | ✅  |
 | [`startNotifications(...)`](#startnotifications)               |   ✅    | ✅  | ✅  |
-| [`stopNotifications(...)`](#stopnotifications)                 |   ✅    | ✅  | ✅  |
+| [`stopNotifications(...)`](#stopnotifications)                 |   ✅    | ✅  | ✅  | -->
 
 #### Legend
 
@@ -388,7 +388,8 @@ For an example, see [usage](#usage).
 | ------------- | --------------------------------------------------------------- |
 | **`options`** | <code><a href="#initializeoptions">InitializeOptions</a></code> |
 
----
+--------------------
+
 
 ### isEnabled()
 
@@ -401,7 +402,8 @@ Always returns `true` on **web**.
 
 **Returns:** <code>Promise&lt;boolean&gt;</code>
 
----
+--------------------
+
 
 ### requestEnable()
 
@@ -412,7 +414,8 @@ requestEnable() => Promise<void>
 Request enabling Bluetooth. Show a system activity that allows the user to turn on Bluetooth. See https://developer.android.com/reference/android/bluetooth/BluetoothAdapter#ACTION_REQUEST_ENABLE
 Only available on **Android**.
 
----
+--------------------
+
 
 ### enable()
 
@@ -424,7 +427,8 @@ Enable Bluetooth.
 Only available on **Android**.
 **Deprecated** Will fail on Android SDK &gt;= 33. Use `requestEnable` instead. See https://developer.android.com/reference/android/bluetooth/BluetoothAdapter#enable()
 
----
+--------------------
+
 
 ### disable()
 
@@ -436,7 +440,8 @@ Disable Bluetooth.
 Only available on **Android**.
 **Deprecated** Will fail on Android SDK &gt;= 33. See https://developer.android.com/reference/android/bluetooth/BluetoothAdapter#disable()
 
----
+--------------------
+
 
 ### startEnabledNotifications(...)
 
@@ -451,7 +456,8 @@ Not available on **web** (the callback will never be invoked).
 | -------------- | ---------------------------------------- | ---------------------------------------------------------- |
 | **`callback`** | <code>(value: boolean) =&gt; void</code> | Callback function to use when the Bluetooth state changes. |
 
----
+--------------------
+
 
 ### stopEnabledNotifications()
 
@@ -461,7 +467,8 @@ stopEnabledNotifications() => Promise<void>
 
 Stop the enabled notifications registered with `startEnabledNotifications`.
 
----
+--------------------
+
 
 ### isLocationEnabled()
 
@@ -474,7 +481,8 @@ Only available on **Android**.
 
 **Returns:** <code>Promise&lt;boolean&gt;</code>
 
----
+--------------------
+
 
 ### openLocationSettings()
 
@@ -485,7 +493,8 @@ openLocationSettings() => Promise<void>
 Open Location settings.
 Only available on **Android**.
 
----
+--------------------
+
 
 ### openBluetoothSettings()
 
@@ -496,7 +505,8 @@ openBluetoothSettings() => Promise<void>
 Open Bluetooth settings.
 Only available on **Android**.
 
----
+--------------------
+
 
 ### openAppSettings()
 
@@ -510,7 +520,8 @@ On **iOS** when a user declines the request to use Bluetooth on the first call o
 to request for Bluetooth again from within the app. In this case Bluetooth has to be enabled in the app settings
 for the app to be able use it.
 
----
+--------------------
+
 
 ### setDisplayStrings(...)
 
@@ -524,7 +535,8 @@ Set the strings that are displayed in the `requestDevice` dialog.
 | -------------------- | --------------------------------------------------------- |
 | **`displayStrings`** | <code><a href="#displaystrings">DisplayStrings</a></code> |
 
----
+--------------------
+
 
 ### requestDevice(...)
 
@@ -541,7 +553,8 @@ For an example, see [usage](#usage).
 
 **Returns:** <code>Promise&lt;<a href="#bledevice">BleDevice</a>&gt;</code>
 
----
+--------------------
+
 
 ### requestLEScan(...)
 
@@ -558,7 +571,8 @@ Scanning will continue until `stopLEScan` is called. For an example, see [usage]
 | **`options`**  | <code><a href="#requestbledeviceoptions">RequestBleDeviceOptions</a></code> |
 | **`callback`** | <code>(result: <a href="#scanresult">ScanResult</a>) =&gt; void</code>      |
 
----
+--------------------
+
 
 ### stopLEScan()
 
@@ -568,7 +582,8 @@ stopLEScan() => Promise<void>
 
 Stop scanning for BLE devices. For an example, see [usage](#usage).
 
----
+--------------------
+
 
 ### getDevices(...)
 
@@ -587,7 +602,8 @@ On Android, you can directly connect to the device with the deviceId.
 
 **Returns:** <code>Promise&lt;BleDevice[]&gt;</code>
 
----
+--------------------
+
 
 ### getBondedDevices()
 
@@ -597,11 +613,12 @@ getBondedDevices() => Promise<BleDevice[]>
 
 Get a list of currently bonded devices.
 Only available on **Android**.
-Uses [getBondedDevices](<https://developer.android.com/reference/android/bluetooth/BluetoothAdapter#getBondedDevices()>) on Android
+Uses [getBondedDevices](https://developer.android.com/reference/android/bluetooth/BluetoothAdapter#getBondedDevices()) on Android
 
 **Returns:** <code>Promise&lt;BleDevice[]&gt;</code>
 
----
+--------------------
+
 
 ### getConnectedDevices(...)
 
@@ -611,7 +628,7 @@ getConnectedDevices(services: string[]) => Promise<BleDevice[]>
 
 Get a list of currently connected devices.
 Uses [retrieveConnectedPeripherals](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518924-retrieveconnectedperipherals) on iOS,
-[getConnectedDevices](<https://developer.android.com/reference/android/bluetooth/BluetoothManager#getConnectedDevices(int)>) on Android
+[getConnectedDevices](https://developer.android.com/reference/android/bluetooth/BluetoothManager#getConnectedDevices(int)) on Android
 and [getDevices](https://developer.mozilla.org/en-US/docs/Web/API/Bluetooth/getDevices) on web.
 
 | Param          | Type                  | Description                                                                                                              |
@@ -620,7 +637,8 @@ and [getDevices](https://developer.mozilla.org/en-US/docs/Web/API/Bluetooth/getD
 
 **Returns:** <code>Promise&lt;BleDevice[]&gt;</code>
 
----
+--------------------
+
 
 ### connect(...)
 
@@ -636,7 +654,8 @@ Connect to a peripheral BLE device. For an example, see [usage](#usage).
 | **`onDisconnect`** | <code>((deviceId: string) =&gt; void)</code>              | Optional disconnect callback function that will be used when the device disconnects                            |
 | **`options`**      | <code><a href="#timeoutoptions">TimeoutOptions</a></code> | Options for plugin call                                                                                        |
 
----
+--------------------
+
 
 ### createBond(...)
 
@@ -652,7 +671,8 @@ Only available on **Android**. On iOS bonding is handled by the OS.
 | **`deviceId`** | <code>string</code>                                       | The ID of the device to use (obtained from [requestDevice](#requestDevice) or [requestLEScan](#requestLEScan)) |
 | **`options`**  | <code><a href="#timeoutoptions">TimeoutOptions</a></code> | Options for plugin call                                                                                        |
 
----
+--------------------
+
 
 ### isBonded(...)
 
@@ -669,7 +689,8 @@ Only available on **Android**. On iOS bonding is handled by the OS.
 
 **Returns:** <code>Promise&lt;boolean&gt;</code>
 
----
+--------------------
+
 
 ### disconnect(...)
 
@@ -683,7 +704,8 @@ Disconnect from a peripheral BLE device. For an example, see [usage](#usage).
 | -------------- | ------------------- | -------------------------------------------------------------------------------------------------------------- |
 | **`deviceId`** | <code>string</code> | The ID of the device to use (obtained from [requestDevice](#requestDevice) or [requestLEScan](#requestLEScan)) |
 
----
+--------------------
+
 
 ### getServices(...)
 
@@ -699,7 +721,8 @@ Get services, characteristics and descriptors of a device.
 
 **Returns:** <code>Promise&lt;BleService[]&gt;</code>
 
----
+--------------------
+
 
 ### discoverServices(...)
 
@@ -716,7 +739,8 @@ Not available on **web**.
 | -------------- | ------------------- | -------------------------------------------------------------------------------------------------------------- |
 | **`deviceId`** | <code>string</code> | The ID of the device to use (obtained from [requestDevice](#requestDevice) or [requestLEScan](#requestLEScan)) |
 
----
+--------------------
+
 
 ### getMtu(...)
 
@@ -733,7 +757,8 @@ Not available on **web**.
 
 **Returns:** <code>Promise&lt;number&gt;</code>
 
----
+--------------------
+
 
 ### requestConnectionPriority(...)
 
@@ -749,7 +774,8 @@ Only available on **Android**. https://developer.android.com/reference/android/b
 | **`deviceId`**           | <code>string</code>                                               | The ID of the device to use (obtained from [requestDevice](#requestDevice) or [requestLEScan](#requestLEScan)) |
 | **`connectionPriority`** | <code><a href="#connectionpriority">ConnectionPriority</a></code> | Request a specific connection priority. See [ConnectionPriority](#connectionpriority)                          |
 
----
+--------------------
+
 
 ### readRssi(...)
 
@@ -766,7 +792,8 @@ Not available on **web**.
 
 **Returns:** <code>Promise&lt;number&gt;</code>
 
----
+--------------------
+
 
 ### read(...)
 
@@ -785,7 +812,8 @@ Read the value of a characteristic. For an example, see [usage](#usage).
 
 **Returns:** <code>Promise&lt;<a href="#dataview">DataView</a>&gt;</code>
 
----
+--------------------
+
 
 ### write(...)
 
@@ -803,7 +831,8 @@ Write a value to a characteristic. For an example, see [usage](#usage).
 | **`value`**          | <code><a href="#dataview">DataView</a></code>             | The value to write as a <a href="#dataview">DataView</a>. To create a <a href="#dataview">DataView</a> from an array of numbers, there is a helper function, e.g. numbersToDataView([1, 0]) |
 | **`options`**        | <code><a href="#timeoutoptions">TimeoutOptions</a></code> | Options for plugin call                                                                                                                                                                     |
 
----
+--------------------
+
 
 ### writeWithoutResponse(...)
 
@@ -821,7 +850,8 @@ Write a value to a characteristic without waiting for a response.
 | **`value`**          | <code><a href="#dataview">DataView</a></code>             | The value to write as a <a href="#dataview">DataView</a>. To create a <a href="#dataview">DataView</a> from an array of numbers, there is a helper function, e.g. numbersToDataView([1, 0]) |
 | **`options`**        | <code><a href="#timeoutoptions">TimeoutOptions</a></code> | Options for plugin call                                                                                                                                                                     |
 
----
+--------------------
+
 
 ### readDescriptor(...)
 
@@ -841,7 +871,8 @@ Read the value of a descriptor.
 
 **Returns:** <code>Promise&lt;<a href="#dataview">DataView</a>&gt;</code>
 
----
+--------------------
+
 
 ### writeDescriptor(...)
 
@@ -860,7 +891,8 @@ Write a value to a descriptor.
 | **`value`**          | <code><a href="#dataview">DataView</a></code>             | The value to write as a <a href="#dataview">DataView</a>. To create a <a href="#dataview">DataView</a> from an array of numbers, there is a helper function, e.g. numbersToDataView([1, 0]) |
 | **`options`**        | <code><a href="#timeoutoptions">TimeoutOptions</a></code> | Options for plugin call                                                                                                                                                                     |
 
----
+--------------------
+
 
 ### startNotifications(...)
 
@@ -880,7 +912,8 @@ For an example, see [usage](#usage).
 | **`characteristic`** | <code>string</code>                                               | UUID of the characteristic (see [UUID format](#uuid-format))                                                   |
 | **`callback`**       | <code>(value: <a href="#dataview">DataView</a>) =&gt; void</code> | Callback function to use when the value of the characteristic changes                                          |
 
----
+--------------------
+
 
 ### stopNotifications(...)
 
@@ -896,15 +929,18 @@ Stop listening to the changes of the value of a characteristic. For an example, 
 | **`service`**        | <code>string</code> | UUID of the service (see [UUID format](#uuid-format))                                                          |
 | **`characteristic`** | <code>string</code> | UUID of the characteristic (see [UUID format](#uuid-format))                                                   |
 
----
+--------------------
+
 
 ### Interfaces
+
 
 #### InitializeOptions
 
 | Prop                          | Type                 | Description                                                                                                                                                                                                                                                                                                                                      | Default            |
 | ----------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ |
 | **`androidNeverForLocation`** | <code>boolean</code> | If your app doesn't use Bluetooth scan results to derive physical location information, you can strongly assert that your app doesn't derive physical location. (Android only) Requires adding 'neverForLocation' to AndroidManifest.xml https://developer.android.com/guide/topics/connectivity/bluetooth/permissions#assert-never-for-location | <code>false</code> |
+
 
 #### DisplayStrings
 
@@ -915,6 +951,7 @@ Stop listening to the changes of the value of a characteristic. For an example, 
 | **`availableDevices`** | <code>string</code> | <code>"Available devices"</code> | 0.0.1 |
 | **`noDeviceFound`**    | <code>string</code> | <code>"No device found"</code>   | 0.0.1 |
 
+
 #### BleDevice
 
 | Prop           | Type                  | Description                                                                                                                                       |
@@ -922,6 +959,7 @@ Stop listening to the changes of the value of a characteristic. For an example, 
 | **`deviceId`** | <code>string</code>   | ID of the device, which will be needed for further calls. On **Android** this is the BLE MAC address. On **iOS** and **web** it is an identifier. |
 | **`name`**     | <code>string</code>   | Name of the peripheral device.                                                                                                                    |
 | **`uuids`**    | <code>string[]</code> |                                                                                                                                                   |
+
 
 #### RequestBleDeviceOptions
 
@@ -933,6 +971,7 @@ Stop listening to the changes of the value of a characteristic. For an example, 
 | **`optionalServices`** | <code>string[]</code>                         | For **web**, all services that will be used have to be listed under services or optionalServices, e.g. [numberToUUID(0x180f)] (see [UUID format](#uuid-format))                                                                                           |
 | **`allowDuplicates`**  | <code>boolean</code>                          | Normally scans will discard the second and subsequent advertisements from a single device. If you need to receive them, set allowDuplicates to true (only applicable in `requestLEScan`). (default: false)                                                |
 | **`scanMode`**         | <code><a href="#scanmode">ScanMode</a></code> | Android scan mode (default: <a href="#scanmode">ScanMode.SCAN_MODE_BALANCED</a>)                                                                                                                                                                          |
+
 
 #### ScanResult
 
@@ -946,6 +985,7 @@ Stop listening to the changes of the value of a characteristic. For an example, 
 | **`serviceData`**      | <code>{ [key: string]: <a href="#dataview">DataView</a>; }</code> | Service data, key is a service UUID and value is the data.                                                                                                                                                                                                                                            |
 | **`uuids`**            | <code>string[]</code>                                             | Advertised services.                                                                                                                                                                                                                                                                                  |
 | **`rawAdvertisement`** | <code><a href="#dataview">DataView</a></code>                     | Raw advertisement data (**Android** only).                                                                                                                                                                                                                                                            |
+
 
 #### DataView
 
@@ -974,6 +1014,7 @@ Stop listening to the changes of the value of a characteristic. For an example, 
 | **setUint16**  | (byteOffset: number, value: number, littleEndian?: boolean \| undefined) =&gt; void | Stores an Uint16 value at the specified byte offset from the start of the view.                                                                                     |
 | **setUint32**  | (byteOffset: number, value: number, littleEndian?: boolean \| undefined) =&gt; void | Stores an Uint32 value at the specified byte offset from the start of the view.                                                                                     |
 
+
 #### ArrayBuffer
 
 Represents a raw buffer of binary data, which is used to store data for the
@@ -989,11 +1030,13 @@ buffer as needed.
 | --------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | **slice** | (begin: number, end?: number \| undefined) =&gt; <a href="#arraybuffer">ArrayBuffer</a> | Returns a section of an <a href="#arraybuffer">ArrayBuffer</a>. |
 
+
 #### TimeoutOptions
 
 | Prop          | Type                | Description                                                                                                |
 | ------------- | ------------------- | ---------------------------------------------------------------------------------------------------------- |
 | **`timeout`** | <code>number</code> | Timeout in milliseconds for plugin call. Default is 10000 for `connect` and 5000 for other plugin methods. |
+
 
 #### BleService
 
@@ -1002,6 +1045,7 @@ buffer as needed.
 | **`uuid`**            | <code>string</code>              |
 | **`characteristics`** | <code>BleCharacteristic[]</code> |
 
+
 #### BleCharacteristic
 
 | Prop              | Type                                                                                |
@@ -1009,6 +1053,7 @@ buffer as needed.
 | **`uuid`**        | <code>string</code>                                                                 |
 | **`properties`**  | <code><a href="#blecharacteristicproperties">BleCharacteristicProperties</a></code> |
 | **`descriptors`** | <code>BleDescriptor[]</code>                                                        |
+
 
 #### BleCharacteristicProperties
 
@@ -1027,13 +1072,16 @@ buffer as needed.
 | **`notifyEncryptionRequired`**   | <code>boolean</code> |
 | **`indicateEncryptionRequired`** | <code>boolean</code> |
 
+
 #### BleDescriptor
 
 | Prop       | Type                |
 | ---------- | ------------------- |
 | **`uuid`** | <code>string</code> |
 
+
 ### Enums
+
 
 #### ScanMode
 
@@ -1042,6 +1090,7 @@ buffer as needed.
 | **`SCAN_MODE_LOW_POWER`**   | <code>0</code> | Perform Bluetooth LE scan in low power mode. This mode is enforced if the scanning application is not in foreground. https://developer.android.com/reference/android/bluetooth/le/ScanSettings#SCAN_MODE_LOW_POWER                                                        |
 | **`SCAN_MODE_BALANCED`**    | <code>1</code> | Perform Bluetooth LE scan in balanced power mode. (default) Scan results are returned at a rate that provides a good trade-off between scan frequency and power consumption. https://developer.android.com/reference/android/bluetooth/le/ScanSettings#SCAN_MODE_BALANCED |
 | **`SCAN_MODE_LOW_LATENCY`** | <code>2</code> | Scan using highest duty cycle. It's recommended to only use this mode when the application is running in the foreground. https://developer.android.com/reference/android/bluetooth/le/ScanSettings#SCAN_MODE_LOW_LATENCY                                                  |
+
 
 #### ConnectionPriority
 
@@ -1053,11 +1102,11 @@ buffer as needed.
 
 </docgen-api>
 
-### UUID format
+<!-- ### UUID format -->
 
-All UUIDs have to be provided in 128 bit format as string, e.g. `'0000180d-0000-1000-8000-00805f9b34fb'`. There is a helper function to convert 16 bit UUID numbers to string:
+<!-- All UUIDs have to be provided in 128 bit format as string, e.g. `'0000180d-0000-1000-8000-00805f9b34fb'`. There is a helper function to convert 16 bit UUID numbers to string: -->
 
-```typescript
+<!-- ```typescript
 import { numberToUUID } from '@capacitor-community/bluetooth-le';
 
 const HEART_RATE_SERVICE = numberToUUID(0x180d);
@@ -1095,4 +1144,4 @@ async function initialize() {
   }
   await BleClient.initialize();
 }
-```
+``` -->
