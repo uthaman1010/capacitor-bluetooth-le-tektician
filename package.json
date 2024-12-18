@@ -1,6 +1,6 @@
 {
   "name": "capacitor-bluetooth-le-tektician",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Created bluetooth plugin",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -67,7 +67,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "CapacitorCommunityBluetoothLe.podspec"
+    "CapacitorBluetoothLeTektician.podspec"
   ],
   "keywords": [
     "capacitor",
